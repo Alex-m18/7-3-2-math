@@ -2,9 +2,10 @@ import StonedCharacter from './StonedCharacter';
 
 class Magician extends StonedCharacter {
   constructor(name, level = 1) {
-    super(name, 'Magician', level);
+    super(name, 'Magician');
     this.private.attack = 10;
     this.private.defence = 40;
+    this.level = level;
   }
 }
 

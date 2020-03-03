@@ -77,3 +77,15 @@ test('should use powerMode', () => {
   expect(character.defence).toBe(25);
   expect(character.attack).toBe(25);
 });
+
+test('should create levelUpped Bowman', () => {
+  const character = new Bowman('vasya', 5);
+  expect(character.level).toBe(5);
+  expect(character.defence).toBe(51.84);
+  expect(character.attack).toBe(51.84);
+});
+
+test('should throw on decreasing level', () => {
+  const character = new Bowman('vasya', 5);
+  expect(() => { character.level = 2; }).toThrow();
+});

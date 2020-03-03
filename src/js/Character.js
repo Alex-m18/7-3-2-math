@@ -8,7 +8,7 @@
  * @throws Will throw an error if the name length is wrong
  */
 class Character {
-  constructor(name, type, level) {
+  constructor(name, type) {
     if (name.length < 2 || name.length > 10) {
       throw new Error('Error in Character: wrong name length');
     }
@@ -23,7 +23,6 @@ class Character {
       powerModeAttacks: 0,
       powerModeUsed: false,
     };
-    while (this.level < level) this.levelUp();
   }
 
   get type() {
@@ -32,6 +31,11 @@ class Character {
 
   get level() {
     return this.private.level;
+  }
+
+  set level(value) {
+    if (this.level > value) throw new Error("Can't decrease level");
+    while (this.level < value) this.levelUp();
   }
 
   get powerModeEnabled() {
@@ -49,23 +53,23 @@ class Character {
   get attack() {
     if (this.private.powerModeAttacks) {
       this.private.powerModeAttacks -= 1;
-      return this.private.attack * 2;
+      return Number((this.private.attack * 2).toFixed(2));
     }
-    return this.private.attack;
+    return Number(this.private.attack.toFixed(2));
   }
 
   // set attack(value) { this.private.attack = value; }
 
   get health() {
-    if (this.private.powerModeAttacks) return this.private.health * 2;
-    return this.private.health;
+    if (this.private.powerModeAttacks) return Number((this.private.health * 2).toFixed(2));
+    return Number(this.private.health.toFixed(2));
   }
 
   // set health(value) { this.private.health = value; }
 
   get defence() {
-    if (this.private.powerModeAttacks) return this.private.defence * 2;
-    return this.private.defence;
+    if (this.private.powerModeAttacks) return Number((this.private.defence * 2).toFixed(2));
+    return Number(this.private.defence.toFixed(2));
   }
 
   // set defence(value) { this.private.defence = value; }
